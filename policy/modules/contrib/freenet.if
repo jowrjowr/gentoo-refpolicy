@@ -1,0 +1,12 @@
+## <summary>freenet</summary>
+
+interface(`freenet_admin',`
+	gen_require(`
+		type freenet_t, freenet_initrc_exec_t;
+	')
+
+	init_labeled_script_domtrans($1, freenet_initrc_exec_t)
+	role_transition $2 freenet_initrc_exec_t system_r;
+	domain_system_change_exemption($1)
+	allow $2 system_r;
+')
