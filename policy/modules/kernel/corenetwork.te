@@ -2,7 +2,7 @@
 # This is a generated file!  Instead of modifying this file, the
 # corenetwork.te.in or corenetwork.te.m4 file should be modified.
 #
-policy_module(corenetwork, 1.20.2)
+policy_module(corenetwork, 1.20.3)
 
 ########################################
 #
@@ -255,6 +255,14 @@ type biff_port_t, port_type, defined_port_type;
 type biff_client_packet_t, packet_type, client_packet_type;
 type biff_server_packet_t, packet_type, server_packet_type;
  # no defined portcon
+
+type bitcoin_port_t, port_type, defined_port_type;
+type bitcoin_client_packet_t, packet_type, client_packet_type;
+type bitcoin_server_packet_t, packet_type, server_packet_type;
+typeattribute bitcoin_port_t unreserved_port_type;
+portcon tcp 8332 gen_context(system_u:object_r:bitcoin_port_t,s0)
+portcon tcp 8333 gen_context(system_u:object_r:bitcoin_port_t,s0)
+
 
 type certmaster_port_t, port_type, defined_port_type;
 type certmaster_client_packet_t, packet_type, client_packet_type;

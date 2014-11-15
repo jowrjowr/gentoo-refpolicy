@@ -1,0 +1,5 @@
+/var/freenet(/.*)?		gen_context(system_u:object_r:freenet_var_t,s0)
+/var/freenet/run.sh		gen_context(system_u:object_r:freenet_exec_t,s0)
+/etc/init.d/freenet		gen_context(system_u:object_r:freenet_initrc_exec_t,s0)
+/etc/freenet-wrapper.conf	gen_context(system_u:object_r:freenet_etc_t,s0)
+
