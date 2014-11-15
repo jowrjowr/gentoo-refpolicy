@@ -119,6 +119,23 @@ interface(`ntp_read_drift_files',`
 
 ########################################
 ## <summary>
+##	Read ntp configuration files.
+## </summary>
+## <param name="domain">
+##	<summary>
+##	Domain allowed access.
+##	</summary>
+## </param>
+#
+interface(`ntp_read_conf_files',`
+	gen_require(`
+		type ntp_conf_t;
+	')
+	read_files_pattern($1, ntp_conf_t, ntp_conf_t)
+')
+
+########################################
+## <summary>
 ##	Read and write ntpd shared memory.
 ## </summary>
 ## <param name="domain">
