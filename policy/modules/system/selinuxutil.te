@@ -53,6 +53,8 @@ type load_policy_t;
 type load_policy_exec_t;
 application_domain(load_policy_t, load_policy_exec_t)
 role system_r types load_policy_t;
+manage_dirs_pattern(load_policy_t, semanage_var_lib_t, semanage_var_lib_t)
+manage_files_pattern(load_policy_t, semanage_var_lib_t, semanage_var_lib_t)
 
 type newrole_t;
 type newrole_exec_t;
@@ -529,6 +531,9 @@ optional_policy(`
 #
 # Setfiles local policy
 #
+
+manage_dirs_pattern(setfiles_t, semanage_var_lib_t, semanage_var_lib_t)
+manage_files_pattern(setfiles_t, semanage_var_lib_t, semanage_var_lib_t)
 
 allow setfiles_t self:capability { dac_override dac_read_search fowner };
 dontaudit setfiles_t self:capability sys_tty_config;
