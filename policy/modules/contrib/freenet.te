@@ -1,0 +1,20 @@
+policy_module(freenet,0.1)
+
+# declarations
+
+type freenet_t;
+type freenet_exec_t;
+type freenet_initrc_exec_t;
+type freenet_etc_t;
+type freenet_var_t;
+
+domain_type(freenet_t)
+init_daemon_domain(freenet_t, freenet_exec_t)
+init_script_file(freenet_initrc_exec_t)
+
+allow freenet_t freenet_var_t:file { read write append create getattr open unlink rename lock };
+allow freenet_t freenet_var_t:dir { create write rmdir read open add_name remove_name search getattr };
+allow freenet_t freenet_var_t:lnk_file read;
+allow freenet_t freenet_etc_t:dir { getattr search open };
+allow freenet_t freenet_etc_t:file { read getattr open };
+

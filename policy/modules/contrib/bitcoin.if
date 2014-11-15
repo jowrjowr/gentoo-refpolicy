@@ -1,0 +1,15 @@
+## <summary>bitcoin</summary>
+
+interface(`bitcoin_admin',`
+	gen_require(`
+		type bitcoin_t, bitcoin_initrc_exec_t, bitcoin_var_run_t;
+	')
+
+	init_labeled_script_domtrans($1, bitcoin_initrc_exec_t)
+	role_transition $2 bitcoin_initrc_exec_t system_r;
+	domain_system_change_exemption($1)
+	allow $2 system_r;
+
+
+	
+')
