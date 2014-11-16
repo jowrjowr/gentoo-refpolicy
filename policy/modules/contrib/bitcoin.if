@@ -1,8 +1,22 @@
 ## <summary>bitcoin</summary>
 
+#######################################
+## <summary>
+##      bitcoin administrative interface
+## </summary>
+## <param name="domain">
+##      <summary>
+##      Domain allowed to transition.
+##      </summary>
+## </param>
+#
+
+
 interface(`bitcoin_admin',`
 	gen_require(`
-		type bitcoin_t, bitcoin_initrc_exec_t, bitcoin_var_run_t;
+		type bitcoin_t, bitcoin_initrc_exec_t, 
+		bitcoin_var_run_t, bitcoin_etc_t,
+		bitcoin_var_lib_t;
 	')
 
 	init_labeled_script_domtrans($1, bitcoin_initrc_exec_t)
@@ -10,6 +24,13 @@ interface(`bitcoin_admin',`
 	domain_system_change_exemption($1)
 	allow $2 system_r;
 
+	rw_dirs_pattern($1, bitcoin_etc_t, bitcoin_etc_t);
+	rw_dirs_pattern($1, bitcoin_var_lib_t, bitcoin_var_lib_t);
 
-	
+	write_files_pattern($1, bitcoin_etc_t, bitcoin_etc_t);
+	write_files_pattern($1, bitcoin_var_lib_t, bitcoin_var_lib_t);	
+
+	# bitcoin.conf is a symlink
+	write_lnk_files_pattern($1, bitcoin_etc_t, bitcoin_etc_t);
+
 ')

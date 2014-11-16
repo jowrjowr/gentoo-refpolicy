@@ -112,6 +112,10 @@ optional_policy(`
 ')
 
 optional_policy(`
+	bitcoin_admin(sysadm_t, sysadm_r)
+')
+
+optional_policy(`
 	bootloader_run(sysadm_t, sysadm_r)
 ')
 

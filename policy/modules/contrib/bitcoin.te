@@ -11,6 +11,12 @@ type bitcoin_var_run_t;
 type bitcoin_log_t;
 type bitcoin_tmp_t;
 
+files_type(bitcoin_var_lib_t)
+files_type(bitcoin_var_run_t)
+files_type(bitcoin_log_t)
+files_type(bitcoin_tmp_t)
+files_type(bitcoin_etc_t)
+
 domain_type(bitcoin_t)
 init_daemon_domain(bitcoin_t, bitcoin_exec_t)
 init_script_file(bitcoin_initrc_exec_t)
@@ -26,12 +32,16 @@ allow bitcoin_t bitcoin_tmp_t:file { create_file_perms write_file_perms };
 files_tmp_filetrans(bitcoin_t, bitcoin_tmp_t, file)
 
 
+allow bitcoin_t self:process signal_perms;
 allow bitcoin_t bitcoin_var_lib_t:file { read write append create getattr open unlink rename lock };
 allow bitcoin_t bitcoin_var_lib_t:dir { create write rmdir read open add_name remove_name search getattr };
-allow bitcoin_t bitcoin_var_lib_t:lnk_file read;
-allow bitcoin_t bitcoin_etc_t:dir { getattr search open };
-allow bitcoin_t bitcoin_etc_t:file { read getattr open };
+allow bitcoin_t bitcoin_etc_t:file read_file_perms;
 
+read_lnk_files_pattern(bitcoin_t, bitcoin_etc_t, bitcoin_etc_t);
+read_files_pattern(bitcoin_t, bitcoin_etc_t, bitcoin_etc_t);
+list_dirs_pattern(bitcoin_t, bitcoin_etc_t, bitcoin_etc_t);
+
+kernel_read_system_state(bitcoin_t)
 kernel_read_vm_sysctls(bitcoin_t)
 
 dev_read_sysfs(bitcoin_t)

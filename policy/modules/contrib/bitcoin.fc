@@ -1,4 +1,10 @@
 /usr/bin/bitcoind					gen_context(system_u:object_r:bitcoin_exec_t,s0)
-/etc/init.d/bitcoind					gen_context(system_u:object_r:bitcoin_initrc_exec_t,s0)
-/var/lib/bitcoin(/.*)?					gen_context(system_u:object_r:bitcoin_var_lib_t,s0)
+/etc/rc\.d/init\.d/bitcoind				gen_context(system_u:object_r:bitcoin_initrc_exec_t,s0)
+
+# not labeling /var/lib/bitcoin itself is a conceit to allow mounting
+# of that directory to have bitcoin located elsewhere, without having
+# to give bitcoin types mount privileges.
+
+/var/lib/bitcoin/.*					gen_context(system_u:object_r:bitcoin_var_lib_t,s0)
 /etc/bitcoin(/.*)?					gen_context(system_u:object_r:bitcoin_etc_t,s0)
+/var/lib/bitcoin/\.bitcoin/bitcoin\.conf		gen_context(system_u:object_r:bitcoin_etc_t,s0)
