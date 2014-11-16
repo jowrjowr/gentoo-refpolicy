@@ -14,7 +14,7 @@ role system_r types openrc_cgroup_release_t;
 #
 
 allow openrc_cgroup_release_t self:unix_stream_socket create_socket_perms;
-dontaudit openrc_cgroup_release_t self:capability dac_override;
+#dontaudit openrc_cgroup_release_t self:capability dac_override;
 
 kernel_domtrans_to(openrc_cgroup_release_t, openrc_cgroup_release_exec_t)
 kernel_read_system_state(openrc_cgroup_release_t)
