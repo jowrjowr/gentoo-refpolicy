@@ -13,6 +13,17 @@ policy_module(tor, 1.9.1)
 ## </desc>
 gen_tunable(tor_bind_all_unreserved_ports, false)
 
+## <desc>
+##	<p>
+##	Determine whether tor can access
+##	static httpd content for DirPortFrontPage
+##	content serving.
+##	</p>
+## </desc>
+gen_tunable(tor_serve_http_content, false)
+
+
+
 type tor_t;
 type tor_exec_t;
 init_daemon_domain(tor_t, tor_exec_t)
@@ -110,6 +121,12 @@ tunable_policy(`tor_bind_all_unreserved_ports',`
 	corenet_sendrecv_all_server_packets(tor_t)
 	corenet_tcp_bind_all_unreserved_ports(tor_t)
 ')
+
+optional_policy(`
+	tunable_policy(`tor_serve_http_content',`
+		apache_read_sys_content(tor_t)
+	')
+')	
 
 optional_policy(`
 	seutil_sigchld_newrole(tor_t)
