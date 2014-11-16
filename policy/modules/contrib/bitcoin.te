@@ -59,9 +59,8 @@ files_read_usr_files(bitcoin_t)
 ##      tcp sockets to all unreserved ports.
 ##      </p>
 ## </desc>
-
-
 gen_tunable(bitcoin_bind_all_unreserved_ports, false)
+
 tunable_policy(`bitcoin_bind_all_unreserved_ports',`
         corenet_sendrecv_all_server_packets(bitcoin_t)
         corenet_tcp_bind_all_unreserved_ports(bitcoin_t)
