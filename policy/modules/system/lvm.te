@@ -16,8 +16,20 @@ type clvmd_var_run_t;
 files_pid_file(clvmd_var_run_t)
 
 type lvm_t;
+
+dev_getattr_fs(lvm_t)
+dev_list_all_dev_nodes(lvm_t)
+fs_search_cgroup_dirs(lvm_t)
+fs_read_cgroup_files(lvm_t)
+
 type lvm_exec_t;
-init_system_domain(lvm_t, lvm_exec_t)
+type lvm_initrc_exec_t;
+
+init_exec_rc(lvm_t)
+
+init_daemon_domain(lvm_t, lvm_exec_t)
+init_script_file(lvm_initrc_exec_t)
+
 # needs privowner because it assigns the identity system_u to device nodes
 # but runs as the identity of the sysadmin
 domain_obj_id_change_exemption(lvm_t)
@@ -40,6 +52,10 @@ files_pid_file(lvm_var_run_t)
 
 type lvm_tmp_t;
 files_tmp_file(lvm_tmp_t)
+
+type lvm_socket_t;
+files_type(lvm_socket_t)
+stream_connect_pattern(lvm_t, lvm_socket_t, lvm_socket_t, lvm_socket_t)
 
 ########################################
 #

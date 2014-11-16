@@ -123,3 +123,24 @@ interface(`lvm_domtrans_clvmd',`
 	corecmd_search_bin($1)
 	domtrans_pattern($1, clvmd_exec_t, clvmd_t)
 ')
+######################################
+## <summary>
+##	Everything necessary to administrate lvm
+## </summary>
+## <param name="domain">
+## <summary>
+##	Domain allowed to transition.
+## </summary>
+## </param>
+#
+
+interface(`lvm_admin',`
+        gen_require(`
+                type lvm_t, lvm_initrc_exec_t, lvm_var_run_t;
+        ')
+
+        init_labeled_script_domtrans($1, lvm_initrc_exec_t)
+        role_transition $2 lvm_initrc_exec_t system_r;
+        domain_system_change_exemption($1)
+        allow $2 system_r;
+')

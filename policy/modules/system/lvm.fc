@@ -28,6 +28,10 @@ ifdef(`distro_gentoo',`
 /etc/lvmtab(/.*)?		gen_context(system_u:object_r:lvm_metadata_t,s0)
 /etc/lvmtab\.d(/.*)?		gen_context(system_u:object_r:lvm_metadata_t,s0)
 
+/etc/rc\.d/init\.d/lvm-monitoring	gen_context(system_u:object_r:lvm_initrc_exec_t,s0)
+/etc/rc\.d/init\.d/lvm			gen_context(system_u:object_r:lvm_initrc_exec_t,s0)
+/etc/rc\.d/init\.d/lvmetad		gen_context(system_u:object_r:lvm_initrc_exec_t,s0)
+
 #
 # /lib
 #
@@ -52,6 +56,7 @@ ifdef(`distro_gentoo',`
 /sbin/lvmchange		--	gen_context(system_u:object_r:lvm_exec_t,s0)
 /sbin/lvmdiskscan	--	gen_context(system_u:object_r:lvm_exec_t,s0)
 /sbin/lvmiopversion	--	gen_context(system_u:object_r:lvm_exec_t,s0)
+/sbin/lvmetad		--	gen_context(system_u:object_r:lvm_exec_t,s0)
 /sbin/lvmsadc		--	gen_context(system_u:object_r:lvm_exec_t,s0)
 /sbin/lvmsar		--	gen_context(system_u:object_r:lvm_exec_t,s0)
 /sbin/lvreduce		--	gen_context(system_u:object_r:lvm_exec_t,s0)
@@ -100,8 +105,11 @@ ifdef(`distro_gentoo',`
 #
 # /var
 #
-/var/cache/multipathd(/.*)?	gen_context(system_u:object_r:lvm_metadata_t,s0)
-/var/lib/multipath(/.*)?	gen_context(system_u:object_r:lvm_var_lib_t,s0)
-/var/lock/lvm(/.*)?		gen_context(system_u:object_r:lvm_lock_t,s0)
-/var/run/multipathd\.sock -s	gen_context(system_u:object_r:lvm_var_run_t,s0)
-/var/run/dmevent.*		gen_context(system_u:object_r:lvm_var_run_t,s0)
+/var/cache/multipathd(/.*)?		gen_context(system_u:object_r:lvm_metadata_t,s0)
+/var/lib/multipath(/.*)?		gen_context(system_u:object_r:lvm_var_lib_t,s0)
+/var/lock/lvm(/.*)?			gen_context(system_u:object_r:lvm_lock_t,s0)
+/var/run/multipathd\.sock	-s	gen_context(system_u:object_r:lvm_var_run_t,s0)
+/var/run/dmevent.*			gen_context(system_u:object_r:lvm_var_run_t,s0)
+/var/run/lvm(/.*)?			gen_context(system_u:object_r:lvm_var_run_t,s0)
+/var/run/lvmetad\.pid			gen_context(system_u:object_r:lvm_var_run_t,s0)
+/var/run/lvm/lvmetad\.socket	-s	gen_context(system_u:object_r:lvm_socket_t,s0)
