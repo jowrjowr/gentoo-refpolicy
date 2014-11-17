@@ -111,7 +111,7 @@ allow ssh_t sshd_key_t:file read_file_perms;
 # Access the ssh temporary files.
 allow ssh_t sshd_tmp_t:dir manage_dir_perms;
 allow ssh_t sshd_tmp_t:file manage_file_perms;
-manage_sock_files_pattern(ssh_t, sshd_tmp_t, sshd_tmp_t)
+#manage_sock_files_pattern(ssh_t, sshd_tmp_t, sshd_tmp_t)
 files_tmp_filetrans(ssh_t, sshd_tmp_t, { file dir })
 
 manage_files_pattern(ssh_t, ssh_tmpfs_t, ssh_tmpfs_t)
