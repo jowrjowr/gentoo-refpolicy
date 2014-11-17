@@ -55,6 +55,9 @@ files_tmp_file(lvm_tmp_t)
 
 type lvm_socket_t;
 files_type(lvm_socket_t)
+
+allow lvm_t lvm_socket_t:sock_file manage_sock_file_perms;
+allow lvm_t self:socket create_socket_perms;
 stream_connect_pattern(lvm_t, lvm_socket_t, lvm_socket_t, lvm_socket_t)
 
 ########################################

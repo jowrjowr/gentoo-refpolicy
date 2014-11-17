@@ -1,4 +1,4 @@
-policy_module(sysnetwork, 1.16.3)
+policy_module(sysnetwork, 1.16.4)
 
 ########################################
 #
@@ -77,7 +77,9 @@ files_pid_filetrans(dhcpc_t, dhcpc_var_run_t, { file dir })
 # Allow read/write to /etc/resolv.conf and /etc/ntp.conf. Note that any files
 # in /etc created by dhcpcd will be labelled net_conf_t.
 sysnet_manage_config(dhcpc_t)
-ntp_read_conf_files(dhcpc_t)
+optional_policy(`
+	ntp_read_conf_files(dhcpc_t)
+')
 files_etc_filetrans(dhcpc_t, net_conf_t, file)
 
 # create temp files
@@ -86,7 +88,9 @@ manage_files_pattern(dhcpc_t, dhcpc_tmp_t, dhcpc_tmp_t)
 files_tmp_filetrans(dhcpc_t, dhcpc_tmp_t, { file dir })
 
 # setup udev uevent sockets
-allow dhcpc_t self:netlink_kobject_uevent_socket { create setopt };
+allow dhcpc_t self:netlink_kobject_uevent_socket create_socket_perms;
+allow dhcpc_t self:netlink_socket create_socket_perms;
+
 
 can_exec(dhcpc_t, dhcpc_exec_t)
 
