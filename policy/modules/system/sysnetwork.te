@@ -1,4 +1,4 @@
-policy_module(sysnetwork, 1.16.3)
+policy_module(sysnetwork, 1.16.4)
 
 ########################################
 #
@@ -86,7 +86,9 @@ manage_files_pattern(dhcpc_t, dhcpc_tmp_t, dhcpc_tmp_t)
 files_tmp_filetrans(dhcpc_t, dhcpc_tmp_t, { file dir })
 
 # setup udev uevent sockets
-allow dhcpc_t self:netlink_kobject_uevent_socket { create setopt };
+allow dhcpc_t self:netlink_kobject_uevent_socket create_socket_perms;
+allow dhcpc_t self:netlink_socket create_socket_perms;
+
 
 can_exec(dhcpc_t, dhcpc_exec_t)
 
