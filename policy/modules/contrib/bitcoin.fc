@@ -8,3 +8,6 @@
 /var/lib/bitcoin/.*					gen_context(system_u:object_r:bitcoin_var_lib_t,s0)
 /etc/bitcoin(/.*)?					gen_context(system_u:object_r:bitcoin_etc_t,s0)
 /var/lib/bitcoin/\.bitcoin/bitcoin\.conf		gen_context(system_u:object_r:bitcoin_etc_t,s0)
+/var/lib/bitcoin/\.bitcoin/debug\.log			gen_context(system_u:object_r:bitcoin_log_t,s0)
+/var/lib/bitcoin/\.bitcoin/log(/.*)?			gen_context(system_u:object_r:bitcoin_log_t,s0)
+	

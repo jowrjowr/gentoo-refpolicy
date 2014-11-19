@@ -528,6 +528,10 @@ ifdef(`distro_gentoo',`
 	optional_policy(`
 		dhcpd_setattr_state_files(initrc_t)
 	')
+
+	optional_policy(`
+		bitcoin_read_conf_files(initrc_t)
+	')
 ')
 
 ifdef(`distro_redhat',`

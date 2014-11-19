@@ -152,6 +152,11 @@ optional_policy(`
 ')
 
 optional_policy(`
+	bitcoin_manage_log(logrotate_t)
+')
+
+
+optional_policy(`
 	callweaver_exec(logrotate_t)
 	callweaver_stream_connect(logrotate_t)
 ')
