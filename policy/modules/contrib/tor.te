@@ -125,6 +125,8 @@ tunable_policy(`tor_bind_all_unreserved_ports',`
 optional_policy(`
 	tunable_policy(`tor_serve_http_content',`
 		apache_read_sys_content(tor_t)
+		apache_search_sys_content(tor_t)
+		apache_list_sys_content(tor_t)
 	')
 ')	
 
